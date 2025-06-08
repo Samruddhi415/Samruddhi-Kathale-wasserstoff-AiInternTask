@@ -91,7 +91,7 @@ def main():
             st.write(f"Gemini API: {gemini_status}")
     
     # Main interface tabs
-    tab1, tab2, tab3, tab4 = st.tabs(["📤 Upload Documents", "❓ Query Documents", "📋 Document Management", "ℹ️ About"])
+    tab1, tab2, tab3 = st.tabs(["📤 Upload Documents", "❓ Query Documents", "📋 Document Management"])
     
     with tab1:
         st.header("Upload Documents")
