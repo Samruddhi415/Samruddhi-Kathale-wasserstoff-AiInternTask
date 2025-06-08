@@ -1,0 +1,24 @@
+# .gitignore
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.env
+.venv/
+venv/
+env/
+
+# Streamlit & FastAPI data
+*.db
+*.sqlite3
+/data/uploads/
+/data/chroma_db/
+
+# OS
+.DS_Store
+
+# VSCode or IDE
+.vscode/
+.idea/
