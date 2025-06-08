@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+
+# Environment
+.env
+*.env
+
+# Virtual environments
+venv/
+.env/
+env/
+ENV/
+
+# Data folders
+data/uploads/
+data/chroma_db/
+
+# OS and editor clutter
+.DS_Store
+.vscode/
+.idea/
+*.log
+
+# Git
+.git
+.gitignore
