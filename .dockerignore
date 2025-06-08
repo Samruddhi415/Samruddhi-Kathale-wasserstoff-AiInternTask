@@ -27,6 +27,6 @@ data/chroma_db/
 .idea/
 *.log
 
-# Git
+#Git
 .git
 .gitignore
