@@ -16,7 +16,6 @@ env/
 # Data folders
 data/uploads/
 data/chroma_db/
-
 # OS and editor clutter
 .DS_Store
 .vscode/
