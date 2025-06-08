@@ -6,17 +6,13 @@ __pycache__/
 *.egg-info/
 dist/
 build/
-
 # Environment
 .env
 *.env
-
 # Virtual environments
 venv/
 .env/
 env/
-ENV/
-
 # Data folders
 data/uploads/
 data/chroma_db/
