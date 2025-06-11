@@ -1,6 +1,7 @@
 from fastapi import FastAPI, File, UploadFile, HTTPException, Form
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, FileResponse
+from fastapi.staticfiles import StaticFiles
 from typing import List, Optional
 import shutil
 import os
@@ -12,10 +13,7 @@ from app.config import settings
 from app.services.document_processor import DocumentProcessor
 from app.services.vector_service import VectorService
 from app.services.llm_service import LLMService
-from fastapi import FastAPI
 import google.generativeai as genai
-import logging
-
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -33,6 +31,18 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Mount static files
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
+STATIC_DIR = os.path.join(BASE_DIR, "static")
+
+print("BASE_DIR =", BASE_DIR)
+print("STATIC_DIR =", STATIC_DIR)
+
+if not os.path.exists(STATIC_DIR):
+    raise RuntimeError(f"Static directory not found at: {STATIC_DIR}")
+
+app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
+
 # Initialize services
 document_processor = DocumentProcessor()
 vector_service = VectorService(settings.CHROMA_DB_PATH, settings.EMBEDDING_MODEL)
@@ -41,9 +51,10 @@ llm_service = LLMService(settings.GEMINI_API_KEY, settings.GEMINI_MODEL)
 # Store document metadata
 document_metadata = {}
 
+# Serve index.html from /static
 @app.get("/")
-async def root():
-    return {"message": "Document Research & Theme Identification Chatbot API"}
+async def serve_frontend():
+    return FileResponse(os.path.join(STATIC_DIR, "index.html"))
 
 @app.get("/health")
 async def health_check():
