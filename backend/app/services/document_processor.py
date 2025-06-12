@@ -10,7 +10,7 @@ import logging
 from pdf2image import convert_from_path
 
 logger = logging.getLogger(__name__)
-
+pytesseract.pytesseract.tesseract_cmd = os.getenv("TESSERACT_CMD")
 class DocumentProcessor:
     def __init__(self):
         pass

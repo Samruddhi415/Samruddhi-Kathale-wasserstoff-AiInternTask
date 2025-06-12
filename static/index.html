@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>📚 Document Research & Theme Identification Chatbot</title>
+    <title>Document Research & Theme Identification Chatbot</title>
     <style>
         * {
             margin: 0;
@@ -305,18 +305,18 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>📚 Document Research & Theme Identification Chatbot</h1>
+            <h1>Document Research & Theme Identification Chatbot</h1>
             <div class="status-bar">
                 <div id="api-status" class="status-item status-error">API: Checking...</div>
                 <div id="doc-count" class="status-item status-success">Documents: 0</div>
-                <div id="gemini-status" class="status-item status-error">Gemini: ❌</div>
+                <div id="gemini-status" class="status-item status-error">Gemini: no</div>
             </div>
         </div>
 
         <div class="tabs">
-            <button class="tab active" onclick="showTab('upload')">📤 Upload Documents</button>
-            <button class="tab" onclick="showTab('query')">❓ Query Documents</button>
-            <button class="tab" onclick="showTab('manage')">📋 Document Management</button>
+            <button class="tab active" onclick="showTab('upload')">Upload Documents</button>
+            <button class="tab" onclick="showTab('query')">Query Documents</button>
+            <button class="tab" onclick="showTab('manage')">Document Management</button>
         </div>
 
         <!-- Upload Tab -->
@@ -325,7 +325,7 @@
             <p>Upload PDF, image, DOCX, or TXT files to build your knowledge base.</p>
             
             <div class="upload-area" onclick="document.getElementById('file-input').click()" id="upload-area">
-                <div style="font-size: 48px; margin-bottom: 10px;">📁</div>
+                <div style="font-size: 48px; margin-bottom: 10px;"></div>
                 <p><strong>Click to select files</strong> or drag and drop</p>
                 <p style="color: #666; margin-top: 5px;">Supports: PDF, PNG, JPG, JPEG, TIFF, BMP, DOCX, TXT</p>
             </div>
@@ -369,7 +369,7 @@
             <h2>Document Management</h2>
             <p>View and manage your uploaded documents.</p>
             
-            <button class="btn btn-secondary" onclick="refreshDocuments()">🔄 Refresh Document List</button>
+            <button class="btn btn-secondary" onclick="refreshDocuments()">Refresh Document List</button>
             
             <div id="documents-list"></div>
             
@@ -381,19 +381,19 @@
                             <option value="">Select document to delete...</option>
                         </select>
                     </div>
-                    <button class="btn btn-secondary" onclick="deleteDocument()">🗑️ Delete Selected Document</button>
+                    <button class="btn btn-secondary" onclick="deleteDocument()">Delete Selected Document</button>
                 </div>
                 
                 <div class="action-card">
                     <h3>Clear All Documents</h3>
                     <div class="alert alert-warning">
-                        ⚠️ This will delete ALL documents permanently!
+                        This will delete ALL documents permanently!
                     </div>
                     <label>
                         <input type="checkbox" id="confirm-clear"> I understand this will delete all documents
                     </label>
                     <br><br>
-                    <button class="btn btn-danger" onclick="clearAllDocuments()">🗑️ Clear All Documents</button>
+                    <button class="btn btn-danger" onclick="clearAllDocuments()">Clear All Documents</button>
                 </div>
             </div>
         </div>
@@ -427,13 +427,13 @@
                 const response = await fetch('/health');
                 const data = await response.json();
                 
-                document.getElementById('api-status').textContent = 'API: ✅ Running';
+                document.getElementById('api-status').textContent = 'API: Running';
                 document.getElementById('api-status').className = 'status-item status-success';
                 document.getElementById('doc-count').textContent = `Documents: ${data.documents_count}`;
-                document.getElementById('gemini-status').textContent = `Gemini: ${data.gemini_configured ? '✅' : '❌'}`;
+                document.getElementById('gemini-status').textContent = `Gemini: ${data.gemini_configured ? 'yes' : 'no'}`;
                 document.getElementById('gemini-status').className = `status-item ${data.gemini_configured ? 'status-success' : 'status-error'}`;
             } catch (error) {
-                document.getElementById('api-status').textContent = 'API: ❌ Not Running';
+                document.getElementById('api-status').textContent = 'API: Not Running';
                 document.getElementById('api-status').className = 'status-item status-error';
                 showAlert('upload-results', 'API is not running! Please start the FastAPI backend first.', 'error');
             }
@@ -521,7 +521,7 @@
                 if (data.error) {
                     showAlert('upload-results', `Error: ${data.error}`, 'error');
                 } else {
-                    let resultHtml = `<div class="alert alert-success">✅ Successfully uploaded ${data.uploaded.length} documents!</div>`;
+                    let resultHtml = `<div class="alert alert-success">Successfully uploaded ${data.uploaded.length} documents!</div>`;
                     
                     if (data.uploaded.length > 0) {
                         resultHtml += '<h3>Successfully Uploaded:</h3>';
@@ -585,10 +585,10 @@
                 if (data.error) {
                     showAlert('query-results', `Error: ${data.error}`, 'error');
                 } else {
-                    let resultHtml = '<div class="alert alert-success">✅ Query completed!</div>';
+                    let resultHtml = '<div class="alert alert-success">Query completed!</div>';
                     
                     if (data.individual_answers && data.individual_answers.length > 0) {
-                        resultHtml += '<h3>📄 Individual Document Answers</h3>';
+                        resultHtml += '<h3>Individual Document Answers</h3>';
                         data.individual_answers.forEach(answer => {
                             resultHtml += `
                                 <div class="answer-card">
@@ -601,7 +601,7 @@
                     }
                     
                     if (data.themes && data.themes.length > 0) {
-                        resultHtml += '<h3>🎯 Theme Analysis</h3>';
+                        resultHtml += '<h3>Theme Analysis</h3>';
                         data.themes.forEach((theme, index) => {
                             resultHtml += `
                                 <div class="theme-card">
@@ -616,7 +616,7 @@
                     
                     if (data.synthesis) {
                         resultHtml += `
-                            <h3>📝 Overall Synthesis</h3>
+                            <h3>Overall Synthesis</h3>
                             <div class="answer-card">
                                 <p>${data.synthesis}</p>
                             </div>
@@ -647,7 +647,7 @@
                 if (data.error) {
                     container.innerHTML = `<div class="alert alert-error">Error loading documents: ${data.error}</div>`;
                 } else if (data.documents && data.documents.length > 0) {
-                    let html = `<h3>📚 ${data.total_count} Documents</h3>`;
+                    let html = `<h3> ${data.total_count} Documents</h3>`;
                     html += '<table class="document-table"><tr><th>Document ID</th><th>Filename</th><th>Pages</th><th>Chunks</th></tr>';
                     
                     // Clear and populate select
@@ -661,7 +661,7 @@
                     html += '</table>';
                     container.innerHTML = html;
                 } else {
-                    container.innerHTML = '<div class="alert alert-warning">📭 No documents uploaded yet.</div>';
+                    container.innerHTML = '<div class="alert alert-warning"> No documents uploaded yet.</div>';
                     select.innerHTML = '<option value="">No documents available</option>';
                 }
             } catch (error) {
@@ -688,7 +688,7 @@
                 const data = await response.json();
                 
                 if (data.success) {
-                    alert(`✅ Document ${docId} deleted!`);
+                    alert(` Document ${docId} deleted!`);
                     refreshDocuments();
                     checkApiHealth();
                 } else {
@@ -717,7 +717,7 @@
                 const data = await response.json();
                 
                 if (data.success) {
-                    alert('✅ All documents cleared!');
+                    alert(' All documents cleared!');
                     refreshDocuments();
                     checkApiHealth();
                     document.getElementById('confirm-clear').checked = false;
